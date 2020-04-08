@@ -12,6 +12,7 @@ Improvements in the current scenario.
 3) In the current scenario, there is no need for a shouldComponentUpdate lifecycle method as the data remains unchanged here.
    shouldComponentUpdate is helpful for better performance to stop re-rendering the DOM when the data remains unchanged.
    I have created such a scenario in attachment.
+   shouldComponentUpdate can also be achieved through pure components
 
 4) handleClick is a function call invoked on clcking the list element, so whatever goes into the function gets excecuted
    once the user clicks a list element. Here if we want to display index, we can alert this by "alert(index)".
