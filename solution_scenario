@@ -1,0 +1,80 @@
+*******************************  Parent  *******************************
+import React, { Component } from 'react'
+import Child from './Child'
+
+export class Parent extends Component {
+
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            items : [
+                {
+                    name: 'Sam',
+                    email: 'somewhere@gmail.com'
+                },
+            
+                {
+                    name: 'Ash',
+                    email: 'something@gmail.com'
+                }
+            ]
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <Child items={this.state.items} />
+            </div>
+        )
+    }
+}
+
+export default Parent
+
+
+******************************  Child  **********************************
+import React from 'react'
+
+class Child extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = { 
+            items: props.items, 
+            number: ''
+        }
+    }
+
+    shouldComponentUpdate (nextProps) {
+        console.log(nextProps.items == this.props.items)
+        return nextProps.items !== this.props.items
+    }
+
+    componentDidMount(){
+        this.myInterval = setInterval(()=>{
+            this.setState({number:0})
+        }, 10000)
+    }
+
+    componentWillMount(){
+        clearInterval(this.myInterval)
+    }
+
+    handleClick (index) {
+        alert(index)
+    }
+
+
+  render () {
+    return (
+      <ul style={{ backgroundColor: 'red', height: 100 }}>
+        {this.state.items.map((item, index) =>(
+            <li key={index} onClick={() => this.handleClick(index)}>{item.name}</li>
+        ))}
+      </ul>
+    )
+  }
+}
+
+export default Child
